@@ -1,6 +1,6 @@
   import React from "react";
   import { motion } from "framer-motion";
-  import { ArrowRight, Download, Mail, Github, Linkedin, Globe, ExternalLink, Sparkles, ChevronUp, Menu, X, Music, Play } from "lucide-react";
+  import { ArrowRight, Download, Mail, Github, Linkedin, Globe, ExternalLink, Sparkles, ChevronUp, Menu, X, Music, Play, Languages } from "lucide-react";
   import { Card, CardContent } from "./components/ui/card.jsx";
   import { Button } from "./components/ui/button.jsx";
 
@@ -120,6 +120,87 @@
 
   export default function App() {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+    const [language, setLanguage] = React.useState('en');
+
+    // Language content
+    const content = {
+      en: {
+        tagline: "Software • AI Expert • Real Estate Tech",
+        heroTitle: "Building systems that turn messy, real-world data into decisions",
+        heroDescription: "Developer, AI expert, and entrepreneur with deep expertise in GPT-4, Claude, and AI music generation. I build systems that turn messy, real-world data into decisions, with proven success in AI automation, finance, and property technology.",
+        downloadResume: "Download Resume",
+        viewProjects: "View Projects",
+        viewExperience: "View Experience",
+        home: "Home",
+        projects: "Projects",
+        experience: "Experience",
+        music: "Music",
+        skills: "Skills",
+        contact: "Contact",
+        projectsTitle: "Highlighted Projects",
+        projectsEyebrow: "Proof of Work",
+        experienceTitle: "Experience",
+        experienceEyebrow: "Where I've Built",
+        musicTitle: "Music",
+        musicEyebrow: "Creative Work",
+        skillsTitle: "Skills",
+        skillsEyebrow: "Toolbox",
+        contactTitle: "Contact",
+        contactEyebrow: "Let's Collaborate",
+        contactDescription: "I’m open to roles where I can build systems, automate workflows, and ship practical tools—especially in environments that value data-driven decisions and real-world impact.",
+        emailMe: "Email Me",
+        viewOnSpotify: "View on Spotify",
+        watchOnYouTube: "Watch on YouTube",
+        viewProfile: "View Profile",
+        searchBaitjet: "Search Baitjet",
+        appStore: "App Store",
+        viewOnUniswap: "View on Uniswap",
+        code: "Code",
+        demo: "Demo",
+        unavailable: "Unavailable",
+        footer: "Built with React, Tailwind.",
+        languageToggle: "ES"
+      },
+      es: {
+        tagline: "Software • Experto en IA • Tecnología Inmobiliaria",
+        heroTitle: "Construyendo sistemas que convierten datos reales desordenados en decisiones",
+        heroDescription: "Desarrollador, experto en IA y emprendedor con amplia experiencia en GPT-4, Claude y generación de música con IA. Construyo sistemas que convierten datos reales desordenados en decisiones, con éxito comprobado en automatización de IA, finanzas y tecnología inmobiliaria.",
+        downloadResume: "Descargar CV",
+        viewProjects: "Ver Proyectos",
+        viewExperience: "Ver Experiencia",
+        home: "Inicio",
+        projects: "Proyectos",
+        experience: "Experiencia",
+        music: "Música",
+        skills: "Habilidades",
+        contact: "Contacto",
+        projectsTitle: "Proyectos Destacados",
+        projectsEyebrow: "Prueba de Trabajo",
+        experienceTitle: "Experiencia",
+        experienceEyebrow: "Antecedentes",
+        musicTitle: "Música",
+        musicEyebrow: "Producción Creativa",
+        skillsTitle: "Habilidades",
+        skillsEyebrow: "Herramientas",
+        contactTitle: "Contacto",
+        contactEyebrow: "Colaboremos",
+        contactDescription: "Estoy abierto a roles donde pueda construir sistemas, automatizar flujos de trabajo y crear herramientas prácticas, especialmente en entornos que valoran las decisiones basadas en datos y el impacto en el mundo real.",
+        emailMe: "Enviar Email",
+        viewOnSpotify: "Ver en Spotify",
+        watchOnYouTube: "Ver en YouTube",
+        viewProfile: "Ver Perfil",
+        searchBaitjet: "Buscar Baitjet",
+        appStore: "App Store",
+        viewOnUniswap: "Ver en Uniswap",
+        code: "Código",
+        demo: "Demo",
+        unavailable: "No Disponible",
+        footer: "Construido con React, Tailwind.",
+        languageToggle: "EN"
+      }
+    };
+
+    const t = content[language];
 
     return (
       <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 text-zinc-800 dark:text-zinc-100">
@@ -130,16 +211,25 @@
               <Sparkles className="h-5 w-5" /> Juan Santos
             </a>
             <div className="hidden sm:flex items-center gap-6 text-sm">
-              <a href="#home" className="hover:opacity-80 transition-opacity">Home</a>
-              <a href="#projects" className="hover:opacity-80 transition-opacity">Projects</a>
-              <a href="#experience" className="hover:opacity-80 transition-opacity">Experience</a>
-              <a href="#music" className="hover:opacity-80 transition-opacity">Music</a>
-              <a href="#skills" className="hover:opacity-80 transition-opacity">Skills</a>
-              <a href="#contact" className="hover:opacity-80 transition-opacity">Contact</a>
+              <a href="#home" className="hover:opacity-80 transition-opacity">{t.home}</a>
+              <a href="#projects" className="hover:opacity-80 transition-opacity">{t.projects}</a>
+              <a href="#experience" className="hover:opacity-80 transition-opacity">{t.experience}</a>
+              <a href="#music" className="hover:opacity-80 transition-opacity">{t.music}</a>
+              <a href="#skills" className="hover:opacity-80 transition-opacity">{t.skills}</a>
+              <a href="#contact" className="hover:opacity-80 transition-opacity">{t.contact}</a>
             </div>
             <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="rounded-2xl hidden sm:inline-flex"
+                onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
+              >
+                <Languages className="mr-2 h-4 w-4"/>
+                {t.languageToggle}
+              </Button>
               <Button asChild className="rounded-2xl hidden sm:inline-flex">
-                <a href="#contact"><Mail className="mr-2 h-4 w-4"/>Contact</a>
+                <a href="#contact"><Mail className="mr-2 h-4 w-4"/>{t.contact}</a>
               </Button>
               <Button
                 variant="ghost"
@@ -166,46 +256,58 @@
                   className="block text-sm hover:opacity-80 transition-opacity"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Home
+                  {t.home}
                 </a>
                 <a
                   href="#projects"
                   className="block text-sm hover:opacity-80 transition-opacity"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Projects
+                  {t.projects}
                 </a>
                 <a
                   href="#experience"
                   className="block text-sm hover:opacity-80 transition-opacity"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Experience
+                  {t.experience}
                 </a>
                 <a
                   href="#music"
                   className="block text-sm hover:opacity-80 transition-opacity"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Music
+                  {t.music}
                 </a>
                 <a
                   href="#skills"
                   className="block text-sm hover:opacity-80 transition-opacity"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Skills
+                  {t.skills}
                 </a>
                 <a
                   href="#contact"
                   className="block text-sm hover:opacity-80 transition-opacity"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Contact
+                  {t.contact}
                 </a>
                 <div className="pt-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-2xl w-full mb-2"
+                    onClick={() => {
+                      setLanguage(language === 'en' ? 'es' : 'en');
+                      setMobileMenuOpen(false);
+                    }}
+                  >
+                    <Languages className="mr-2 h-4 w-4"/>
+                    {t.languageToggle}
+                  </Button>
                   <Button asChild className="rounded-2xl w-full">
-                    <a href="#contact"><Mail className="mr-2 h-4 w-4"/>Contact</a>
+                    <a href="#contact"><Mail className="mr-2 h-4 w-4"/>{t.contact}</a>
                   </Button>
                 </div>
               </div>
@@ -217,27 +319,27 @@
         <section id="home" className="relative overflow-hidden">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-20">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <p className="text-sm uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Software • AI Expert • Real Estate Tech</p>
+              <p className="text-sm uppercase tracking-wider text-zinc-500 dark:text-zinc-400">{t.tagline}</p>
               <h1 className="mt-3 text-4xl sm:text-6xl font-bold leading-tight text-zinc-900 dark:text-zinc-50">
-                Building systems that turn messy, real-world data into decisions
+                {t.heroTitle}
               </h1>
               <p className="mt-5 max-w-2xl text-zinc-600 dark:text-zinc-300">
-                Developer, AI expert, and entrepreneur with deep expertise in GPT-4, Claude, and AI music generation. I build systems that turn messy, real-world data into decisions, with proven success in AI automation, finance, and property technology.
+                {t.heroDescription}
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Button asChild className="rounded-2xl">
                   <a href="/Juan_Santos_Bilingual_Tech_Resume_WebsiteFix.pdf" download="Juan_Santos_Bilingual_Tech_Resume_WebsiteFix.pdf">
-                    <Download className="mr-2 h-4 w-4"/> Download Resume
+                    <Download className="mr-2 h-4 w-4"/> {t.downloadResume}
                   </a>
                 </Button>
                 <Button asChild variant="outline" className="rounded-2xl">
                   <a href="#projects">
-                    View Projects <ArrowRight className="ml-2 h-4 w-4"/>
+                    {t.viewProjects} <ArrowRight className="ml-2 h-4 w-4"/>
                   </a>
                 </Button>
                 <Button asChild variant="outline" className="rounded-2xl">
                   <a href="#experience">
-                    View Experience <ArrowRight className="ml-2 h-4 w-4"/>
+                    {t.viewExperience} <ArrowRight className="ml-2 h-4 w-4"/>
                   </a>
                 </Button>
               </div>
@@ -265,7 +367,7 @@
         </section>
 
         {/* Projects */}
-        <Section id="projects" title="Highlighted Projects" eyebrow="Proof of Work">
+        <Section id="projects" title={t.projectsTitle} eyebrow={t.projectsEyebrow}>
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
             {projects.map((p, i) => (
               <motion.div key={p.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
@@ -290,30 +392,30 @@
                       {p.status ? (
                         <span className="inline-flex items-center text-sm text-amber-600 dark:text-amber-400">
                           <span className="mr-1 h-2 w-2 rounded-full bg-amber-500"></span>
-                          {p.status}
+                          {t.unavailable}
                         </span>
                       ) : p.isAppStore ? (
                         <a href={p.link} target="_blank" rel="noreferrer" className="inline-flex items-center text-sm text-green-600 dark:text-green-400 hover:underline">
                           <svg className="mr-1 h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                           </svg>
-                          App Store
+                          {t.appStore}
                         </a>
                       ) : p.isCrypto ? (
                         <a href={p.link} target="_blank" rel="noreferrer" className="inline-flex items-center text-sm text-purple-600 dark:text-purple-400 hover:underline">
                           <svg className="mr-1 h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                           </svg>
-                          View on Uniswap
+                          {t.viewOnUniswap}
                         </a>
                       ) : (
                         <>
                           <a href={p.link} className="inline-flex items-center text-sm text-indigo-600 dark:text-indigo-400 hover:underline">
-                            <Github className="mr-1 h-3.5 w-3.5"/> Code
+                            <Github className="mr-1 h-3.5 w-3.5"/> {t.code}
                           </a>
                           {p.demo && (
                             <a href={p.demo} target="_blank" rel="noreferrer" className="inline-flex items-center text-sm text-indigo-600 dark:text-indigo-400 hover:underline">
-                              <ExternalLink className="mr-1 h-3.5 w-3.5"/> Demo
+                              <ExternalLink className="mr-1 h-3.5 w-3.5"/> {t.demo}
                             </a>
                           )}
                         </>
@@ -327,7 +429,7 @@
         </Section>
 
         {/* Experience */}
-        <Section id="experience" title="Experience" eyebrow="Where I've Built">
+        <Section id="experience" title={t.experienceTitle} eyebrow={t.experienceEyebrow}>
           <div className="grid md:grid-cols-2 gap-6">
             <Card className="rounded-2xl border-zinc-200 dark:border-zinc-800">
               <CardContent className="p-6">
@@ -378,7 +480,7 @@
         </Section>
 
         {/* Music */}
-        <Section id="music" title="Music" eyebrow="Creative Work">
+        <Section id="music" title={t.musicTitle} eyebrow={t.musicEyebrow}>
           <div className="max-w-4xl">
             <p className="text-zinc-600 dark:text-zinc-300 mb-8">
               When I'm not coding or building businesses, I create music across various genres. From production to streaming, here's where you can find my musical work.
@@ -391,7 +493,7 @@
                   <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-4">2,216 monthly listeners • Baitjet</p>
                   <Button asChild variant="outline" className="rounded-2xl w-full">
                     <a href="https://open.spotify.com/artist/6EQHv0arvH6gvWhyhHVbMG" target="_blank" rel="noreferrer">
-                      <Play className="mr-2 h-4 w-4"/> Listen on Spotify
+                      <Play className="mr-2 h-4 w-4"/> {t.viewOnSpotify}
                     </a>
                   </Button>
                 </CardContent>
@@ -406,7 +508,7 @@
                   <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-4">Music videos and live performances</p>
                   <Button asChild variant="outline" className="rounded-2xl w-full">
                     <a href="https://www.youtube.com/@Mr.J.C.Santos" target="_blank" rel="noreferrer">
-                      <Play className="mr-2 h-4 w-4"/> Watch on YouTube
+                      <Play className="mr-2 h-4 w-4"/> {t.watchOnYouTube}
                     </a>
                   </Button>
                 </CardContent>
@@ -422,7 +524,7 @@
                   <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-4 italic">Countless songs available • Ask for links if needed</p>
                   <Button asChild variant="outline" className="rounded-2xl w-full">
                     <a href="https://www.producer.ai/baitjet" target="_blank" rel="noreferrer">
-                      <Music className="mr-2 h-4 w-4"/> View Profile
+                      <Music className="mr-2 h-4 w-4"/> {t.viewProfile}
                     </a>
                   </Button>
                 </CardContent>
@@ -440,7 +542,7 @@
                   <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-4">Discover Baitjet across all platforms</p>
                   <Button asChild variant="outline" className="rounded-2xl w-full">
                     <a href="https://www.google.com/search?q=baitjet" target="_blank" rel="noreferrer">
-                      <Play className="mr-2 h-4 w-4"/> Search Baitjet
+                      <Play className="mr-2 h-4 w-4"/> {t.searchBaitjet}
                     </a>
                   </Button>
                 </CardContent>
@@ -450,7 +552,7 @@
         </Section>
 
         {/* Skills */}
-        <Section id="skills" title="Skills" eyebrow="Toolbox">
+        <Section id="skills" title={t.skillsTitle} eyebrow={t.skillsEyebrow}>
           <div className="grid md:grid-cols-2 gap-6">
             {Object.entries(skills).map(([group, items]) => (
               <Card key={group} className="rounded-2xl border-zinc-200 dark:border-zinc-800">
@@ -468,14 +570,14 @@
         </Section>
 
         {/* Contact */}
-        <Section id="contact" title="Contact" eyebrow="Let's Collaborate">
+        <Section id="contact" title={t.contactTitle} eyebrow={t.contactEyebrow}>
           <div className="max-w-2xl">
             <p className="text-zinc-600 dark:text-zinc-300">
-              I’m open to roles where I can build systems, automate workflows, and ship practical tools—especially in environments that value data-driven decisions and real-world impact.
+              {t.contactDescription}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button asChild className="rounded-2xl">
-                <a href="mailto:baitjet@gmail.com"><Mail className="mr-2 h-4 w-4"/> Email Me</a>
+                <a href="mailto:baitjet@gmail.com"><Mail className="mr-2 h-4 w-4"/> {t.emailMe}</a>
               </Button>
               <Button asChild variant="outline" className="rounded-2xl">
                 <a href="https://github.com/thereal-baitjet" target="_blank" rel="noreferrer"><Github className="mr-2 h-4 w-4"/> GitHub</a>
@@ -511,7 +613,7 @@
 
         <footer className="border-t border-zinc-200 dark:border-zinc-800 py-10">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-zinc-500 dark:text-zinc-400">
-            © {new Date().getFullYear()} Juan Santos. Built with React, Tailwind.
+            © {new Date().getFullYear()} Juan Santos. {t.footer}
           </div>
         </footer>
       </div>
