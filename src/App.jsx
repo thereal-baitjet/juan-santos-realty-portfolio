@@ -4,6 +4,71 @@
   import { Card, CardContent } from "./components/ui/card.jsx";
   import { Button } from "./components/ui/button.jsx";
 
+  // Animated Image Component
+function AnimatedImage({ interval = 12000, duration = 2000 }) {
+  const [isAnimating, setIsAnimating] = React.useState(false);
+  const [position, setPosition] = React.useState({ x: 50, y: 50 });
+
+  const getRandomPosition = () => {
+    // Keep image within viewport bounds (accounting for image size)
+    const maxX = 85; // 85% from left edge
+    const maxY = 85; // 85% from top edge
+    const minX = 15; // 15% from left edge
+    const minY = 15; // 15% from top edge
+    
+    return {
+      x: Math.random() * (maxX - minX) + minX,
+      y: Math.random() * (maxY - minY) + minY
+    };
+  };
+
+  React.useEffect(() => {
+    const startAnimation = () => {
+      setPosition(getRandomPosition());
+      setIsAnimating(true);
+      setTimeout(() => setIsAnimating(false), duration);
+    };
+
+    // Start first animation after a longer delay
+    const initialTimer = setTimeout(startAnimation, 3000);
+
+    // Set up periodic animations with longer intervals
+    const intervalTimer = setInterval(startAnimation, interval);
+
+    return () => {
+      clearTimeout(initialTimer);
+      clearInterval(intervalTimer);
+    };
+  }, [interval, duration]);
+
+  return (
+    <div 
+      className="fixed pointer-events-none z-10"
+      style={{
+        left: `${position.x}%`,
+        top: `${position.y}%`,
+        transform: 'translate(-50%, -50%)'
+      }}
+    >
+      <div
+        className={`w-24 h-24 rounded-full shadow-lg overflow-hidden ${
+          isAnimating ? 'animate-pop-explode' : 'opacity-0 scale-0'
+        }`}
+        style={{
+          animationDuration: `${duration}ms`,
+          animationTimingFunction: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+        }}
+      >
+        <img 
+          src="/JX9A3790_750x750.jpeg" 
+          alt="Juan Santos" 
+          className="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+  );
+}
+
   function Badge({ children }) {
     return (
       <span className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium bg-white/70 dark:bg-zinc-900/70 backdrop-blur border-zinc-200 dark:border-zinc-800">
@@ -114,7 +179,7 @@
     Development: ["Python", "JavaScript", "Vue.js", "Angular", "Node.js", "SQL", "Firebase", "APIs"],
     "AI & Machine Learning": ["GPT-4", "Claude", "Whisper", "Stable Diffusion", "Producer.ai", "Riffusion", "AI Music Generation", "Prompt Engineering"],
     "Automation & Integration": ["n8n", "GoHighLevel", "CRM", "API Integration", "Workflow Automation"],
-    "Business & Finance": ["Series 7", "SIE", "Life & Health", "Realtor", "Wholesale", "Crypto Trading"],
+    "Business & Finance": ["SIE", "Life & Health", "Realtor", "Wholesale", "Crypto Trading"],
     "Soft Skills": ["Leadership", "Strategy", "Client Management", "Negotiation"],
   };
 
@@ -317,6 +382,7 @@
 
         {/* Hero */}
         <section id="home" className="relative overflow-hidden">
+          <AnimatedImage interval={15000} duration={2000} />
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-20">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               <p className="text-sm uppercase tracking-wider text-zinc-500 dark:text-zinc-400">{t.tagline}</p>
@@ -328,7 +394,7 @@
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Button asChild className="rounded-2xl">
-                  <a href="/Juan_Santos_Bilingual_Tech_Resume_WebsiteFix.pdf" download="Juan_Santos_Bilingual_Tech_Resume_WebsiteFix.pdf">
+                  <a href="/Juan_Santos_Bilingual_Tech_Resume_Rutgers_Final.pdf" download="Juan_Santos_Bilingual_Tech_Resume_Rutgers_Final.pdf">
                     <Download className="mr-2 h-4 w-4"/> {t.downloadResume}
                   </a>
                 </Button>
